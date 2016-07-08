@@ -11,7 +11,7 @@ class BoardComponent extends React.Component {
     return (
       <div className="board-component">
         <h1>Board name: {this.props.board.name}</h1>
-        <Tabs value={this.props.list.id}>
+        <Tabs value={this.props.board.currentListId}>
           {this.props.board.lists.map(this.renderList.bind(this))}
         </Tabs>
       </div>
@@ -44,7 +44,7 @@ class BoardComponent extends React.Component {
     let doneList = Object.assign({}, this.props.board.doneList);
     doneList.cards = doneList.cards.concat(card);
     this.props.actions.updateDoneList(doneList);
-    
+
   }
 }
 

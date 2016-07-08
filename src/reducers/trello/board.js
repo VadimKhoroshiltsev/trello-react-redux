@@ -8,37 +8,45 @@ import * as actionNames from '../../actions/const';
 
 const initialState = {};
 
-module.exports = function(state = Immutable({
+module.exports = function (state = Immutable({
   id: undefined,
   name: undefined,
+  currentListId: undefined,
   lists: []
 }), action) {
   switch (action.type) {
     case actionNames.SET_CURRENT_BOARD:
-      {
-        return Immutable({
-          ...state,
-          ...action.board
-        });
-      }
+    {
+      return Immutable({
+        ...state,
+        ...action.board
+      });
+    }
+    case actionNames.SET_CURRENT_LIST:
+    {
+      return Immutable({
+        ...state,
+        currentListId: action.list.id
+      });
+    }
     case actionNames.UPDATE_LIST:
-      {
-        return Immutable({
-          ...state,
-          lists: state.lists.map((currentList) => currentList.id === action.list.id ? action.list : currentList)
-        })
-      }
+    {
+      return Immutable({
+        ...state,
+        lists: state.lists.map((currentList) => currentList.id === action.list.id ? action.list : currentList)
+      })
+    }
     case actionNames.UPDATE_DONE_LIST:
-      {
-        return Immutable({
-          ...state,
-          doneList: action.doneList
-        })
-      }
+    {
+      return Immutable({
+        ...state,
+        doneList: action.doneList
+      })
+    }
     default:
-      {
-        /* Return original state if no actions were consumed. */
-        return state;
-      }
+    {
+      /* Return original state if no actions were consumed. */
+      return state;
+    }
   }
 }

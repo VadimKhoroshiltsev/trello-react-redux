@@ -1,6 +1,7 @@
 'use strict';
 
 import React from 'react';
+import RaisedButton from 'material-ui/RaisedButton';
 
 require('styles//UserPanel.sass');
 
@@ -8,7 +9,8 @@ class UserPanelComponent extends React.Component {
   render() {
     return (
       <div className="userpanel-component">
-        Please edit src/components///UserPanelComponent.js to update this component!
+        <RaisedButton>Login</RaisedButton>
+        <RaisedButton>Logout</RaisedButton>
       </div>
     );
   }

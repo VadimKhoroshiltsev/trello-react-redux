@@ -103,9 +103,11 @@ export function getCurrentBoard() {
     "dateLastView": "2016-07-06T12:40:31.665Z",
     "shortUrl": "https://trello.com/b/c9Yaz7ts"
   };
+  let lists = getBoardLists(board.id);
   Object.assign(board, {
-    lists: getBoardLists(board.id),
-    doneList: getDoneList()
+    lists,
+    doneList: getDoneList(),
+    currentListId: lists[0].id
   })
   return board;
 }
