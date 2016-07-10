@@ -5,3 +5,5 @@ export const SET_CURRENT_LIST = 'SET_CURRENT_LIST';
 export const UPDATE_LIST = 'UPDATE_LIST';
 export const UPDATE_DONE_LIST = 'UPDATE_DONE_LIST';
 export const SET_TOKEN = 'SET_TOKEN';
+export const SET_USER = 'SET_USER';
+export const LOGOUT = 'LOGOUT';

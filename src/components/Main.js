@@ -21,7 +21,7 @@ class AppComponent extends React.Component {
   renderBoard(){
     return (
       <div className="app">
-        <UserPanel />
+        <UserPanel actions={this.props.actions} user={this.props.user} />
         <Board actions={this.props.actions} board={this.props.board} list={this.props.list} />
       </div>
     );

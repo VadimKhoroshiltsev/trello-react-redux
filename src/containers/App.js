@@ -49,7 +49,9 @@ function mapDispatchToProps(dispatch) {
     setCurrentList: require('../actions/trello/setCurrentList.js'),
     updateList: require('../actions/trello/updateList.js'),
     updateDoneList: require('../actions/trello/updateDoneList.js'),
-    setToken: require('../actions/trello/setToken.js')
+    setToken: require('../actions/trello/setToken.js'),
+    setUser: require('../actions/trello/setUser.js'),
+    logout: require('../actions/trello/logout.js')
   };
   const actionMap = { actions: bindActionCreators(actions, dispatch) };
   return actionMap;

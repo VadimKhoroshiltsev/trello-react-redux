@@ -11,6 +11,7 @@ import * as actionNames from '../../actions/const';
 
 module.exports = function(state = Immutable({
   id: undefined,
+  fullName: '',
   token: undefined,
   appKey: APP_KEY
 }), action) {
@@ -18,13 +19,27 @@ module.exports = function(state = Immutable({
   //let nextState = Object.assign({}, state);
 
   switch(action.type) {
-
     case actionNames.SET_TOKEN: {
       return Immutable({
         ...state,
         token: action.token
       })
-    } break;
+    };
+    case actionNames.SET_USER: {
+      return Immutable({
+        ...state,
+        id: action.user.id,
+        fullName: action.user.fullName
+      })
+    };
+    case actionNames.LOGOUT: {
+      return Immutable({
+        ...state,
+        id: undefined,
+        fullName: '',
+        token: undefined
+      })
+    }
     default: {
       /* Return original state if no actions were consumed. */
       return state;

@@ -206,3 +206,7 @@ export function getList(listId) {
     }]
   }
 }
+
+export function getUser() {
+
+}
