@@ -15,10 +15,14 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 /* Populated by react-webpack-redux:reducer */
 class App extends Component {
   render() {
-    const {actions, board, user} = this.props;
+    const {actions, board, user, settings} = this.props;
     return (
       <MuiThemeProvider>
-        <Main actions={actions} board={board} user={user}/>
+        <Main
+          actions={actions}
+          board={board}
+          user={user}
+          settings={settings}/>
       </MuiThemeProvider>
     );
   }
@@ -31,13 +35,15 @@ class App extends Component {
 App.propTypes = {
   actions: PropTypes.object.isRequired,
   board: PropTypes.object.isRequired,
-  user: PropTypes.object.isRequired
+  user: PropTypes.object.isRequired,
+  settings: PropTypes.object.isRequired
 };
 function mapStateToProps(state) {
   /* Populated by react-webpack-redux:reducer */
   const props = {
     board: state.board,
-    user: state.user
+    user: state.user,
+    settings: state.settings
   };
   return props;
 }
@@ -51,7 +57,9 @@ function mapDispatchToProps(dispatch) {
     updateDoneList: require('../actions/trello/updateDoneList.js'),
     setToken: require('../actions/trello/setToken.js'),
     setUser: require('../actions/trello/setUser.js'),
-    logout: require('../actions/trello/logout.js')
+    logout: require('../actions/trello/logout.js'),
+    showSettingsPage: require('../actions/showSettingsPage.js'),
+    hideSettingsPage: require('../actions/hideSettingsPage.js')
   };
   const actionMap = { actions: bindActionCreators(actions, dispatch) };
   return actionMap;

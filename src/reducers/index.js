@@ -10,6 +10,7 @@ import { combineReducers } from 'redux';
 /* Populated by react-webpack-redux:reducer */
 const reducers = {
   board: require('./trello/board.js'),
-  user: require('./trello/user.js')
+  user: require('./trello/user.js'),
+  settings: require('./settings.js')
 };
 module.exports = combineReducers(reducers);

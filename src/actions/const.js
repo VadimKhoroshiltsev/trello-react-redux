@@ -7,3 +7,5 @@ export const UPDATE_DONE_LIST = 'UPDATE_DONE_LIST';
 export const SET_TOKEN = 'SET_TOKEN';
 export const SET_USER = 'SET_USER';
 export const LOGOUT = 'LOGOUT';
+export const SHOW_SETTINGS_PAGE = 'SHOW_SETTINGS_PAGE';
+export const HIDE_SETTINGS_PAGE = 'HIDE_SETTINGS_PAGE';
