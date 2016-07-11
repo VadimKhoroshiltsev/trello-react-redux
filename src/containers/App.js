@@ -61,7 +61,8 @@ function mapDispatchToProps(dispatch) {
     showSettingsPage: require('../actions/showSettingsPage.js'),
     hideSettingsPage: require('../actions/hideSettingsPage.js'),
     setAvailableBoards: require('../actions/setAvailableBoards.js'),
-    setActiveBoardId: require('../actions/setActiveBoardId.js')
+    setActiveBoardId: require('../actions/setActiveBoardId.js'),
+    setActiveLists: require('../actions/setActiveLists.js')
   };
   const actionMap = { actions: bindActionCreators(actions, dispatch) };
   return actionMap;

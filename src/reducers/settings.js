@@ -11,6 +11,7 @@ module.exports = function(state = new Immutable({
   opened: false,
   boards: [],
   activeBoardId: undefined,
+  activeLists: [],
   todoListId: undefined
 }), action) {
   /* Keep the reducer clean - do not mutate the original state. */
@@ -39,6 +40,12 @@ module.exports = function(state = new Immutable({
       return new Immutable({
         ...state,
         activeBoardId: action.boardId
+      })
+    }
+    case actionNames.SET_ACTIVE_LISTS: {
+      return new Immutable({
+        ...state,
+        activeLists: action.lists
       })
     }
     default: {

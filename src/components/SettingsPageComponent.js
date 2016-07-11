@@ -16,7 +16,6 @@ import {
 
 import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
-import BoardChoosingStep from './settings/BoardChoosingStepComponent';
 
 require('styles//SettingsPage.sass');
 
@@ -33,9 +32,18 @@ class SettingsPageComponent extends React.Component {
 
   handleNext = () => {
     const {stepIndex} = this.state;
-    this.setState({
-      stepIndex: stepIndex + 1
-    });
+
+    switch (stepIndex) {
+      case 0: {
+         Settings.getBoardLists(this.props.settings.activeBoardId).then((lists => {
+           this.props.actions.setActiveLists(lists);
+           this.setState({
+             stepIndex: stepIndex + 1
+           });
+         }).bind(this))
+      } break;
+    }
+
   };
 
   handlePrev = () => {
@@ -60,7 +68,8 @@ class SettingsPageComponent extends React.Component {
         disabled={true}
       />
     ];
-    let handleChange = (event, index, value) => this.setState({value});
+    
+    
     return (
       <Dialog title="Settings" modal={true} open={this.props.settings.opened} actions={actions}>
       <Stepper activeStep={stepIndex} orientation="vertical">
@@ -68,7 +77,6 @@ class SettingsPageComponent extends React.Component {
           <StepLabel>Select active board</StepLabel>
           <StepContent>
             <p>
-              Select active board: <br/>
               <SelectField value={this.props.settings.activeBoardId} onChange={this.boardChanged.bind(this)}>
                 {this.props.settings.boards.map(board => <MenuItem value={board.id} primaryText={board.name} />)}
               </SelectField>
@@ -77,20 +85,23 @@ class SettingsPageComponent extends React.Component {
           </StepContent>
         </Step>
         <Step>
-          <StepLabel>Create an ad group</StepLabel>
+          <StepLabel>Select TODO list</StepLabel>
           <StepContent>
-            <p>An ad group contains one or more ads which target a shared set of keywords.</p>
+            <p>
+              <SelectField>
+                {this.props.settings.activeLists.map(list => <MenuItem value={list.id} primaryText={list.name} />)}
+              </SelectField>
+            </p>
             {this.renderStepActions(1)}
           </StepContent>
         </Step>
         <Step>
-          <StepLabel>Create an ad</StepLabel>
+          <StepLabel>Select Done list</StepLabel>
           <StepContent>
             <p>
-              Try out different ad text to see what brings in the most customers,
-              and learn how to enhance your ads using features like ad extensions.
-              If you run into any problems with your ads, find out how to tell if
-              they are running and how to resolve approval issues.
+              <SelectField>
+                {this.props.settings.activeLists.map(list => <MenuItem value={list.id} primaryText={list.name} />)}
+              </SelectField>
             </p>
             {this.renderStepActions(2)}
           </StepContent>
