@@ -59,7 +59,9 @@ function mapDispatchToProps(dispatch) {
     setUser: require('../actions/trello/setUser.js'),
     logout: require('../actions/trello/logout.js'),
     showSettingsPage: require('../actions/showSettingsPage.js'),
-    hideSettingsPage: require('../actions/hideSettingsPage.js')
+    hideSettingsPage: require('../actions/hideSettingsPage.js'),
+    setAvailableBoards: require('../actions/setAvailableBoards.js'),
+    setActiveBoardId: require('../actions/setActiveBoardId.js')
   };
   const actionMap = { actions: bindActionCreators(actions, dispatch) };
   return actionMap;
