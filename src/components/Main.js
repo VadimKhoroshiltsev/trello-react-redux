@@ -7,7 +7,9 @@ import UserPanel from './UserPanelComponent';
 import LoginForm from './LoginFormComponent';
 import SettingsPage from './SettingsPageComponent';
 import * as trello from '../data';
-import { List, ListItem } from 'material-ui/List';
+
+import injectTapEventPlugin from 'react-tap-event-plugin';
+injectTapEventPlugin();
 
 class AppComponent extends React.Component {
   componentWillMount() {

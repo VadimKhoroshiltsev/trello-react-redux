@@ -9,6 +9,9 @@ const initialState = {};
 
 module.exports = function(state = new Immutable({
   opened: false,
+  boards: [],
+  activeBoardId: undefined,
+  todoListId: undefined
 }), action) {
   /* Keep the reducer clean - do not mutate the original state. */
   //let nextState = Object.assign({}, state);
@@ -19,16 +22,28 @@ module.exports = function(state = new Immutable({
         ...state,
         opened: true
       });
-    };
+    }
     case actionNames.HIDE_SETTINGS_PAGE: {
       return new Immutable({
         ...state,
-        opened: false    
+        opened: false
       });
+    }
+    case actionNames.SET_AVAILABLE_BOARDS: {
+      return new Immutable({
+        ...state,
+        boards: action.boards
+      })
+    }
+    case actionNames.SET_ACTIVE_BOARD_ID: {
+      return new Immutable({
+        ...state,
+        activeBoardId: action.boardId
+      })
     }
     default: {
       /* Return original state if no actions were consumed. */
       return state;
     }
   }
-}
+};

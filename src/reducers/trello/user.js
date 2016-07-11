@@ -24,14 +24,14 @@ module.exports = function(state = Immutable({
         ...state,
         token: action.token
       })
-    };
+    }
     case actionNames.SET_USER: {
       return Immutable({
         ...state,
         id: action.user.id,
         fullName: action.user.fullName
       })
-    };
+    }
     case actionNames.LOGOUT: {
       return Immutable({
         ...state,

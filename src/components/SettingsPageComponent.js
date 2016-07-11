@@ -1,5 +1,7 @@
 'use strict';
 
+import * as Settings from '../data/settings';
+
 import React from 'react';
 import Dialog from 'material-ui/Dialog';
 import RaisedButton from 'material-ui/RaisedButton';
@@ -12,13 +14,21 @@ import {
   StepContent,
 } from 'material-ui/Stepper';
 
+import SelectField from 'material-ui/SelectField';
+import MenuItem from 'material-ui/MenuItem';
+import BoardChoosingStep from './settings/BoardChoosingStepComponent';
 
 require('styles//SettingsPage.sass');
 
 class SettingsPageComponent extends React.Component {
+  componentWillMount(){
+    Settings.getOpenedBoard().then(this.props.actions.setAvailableBoards);
+  }
+
+
   state = {
     finished: false,
-    stepIndex: 0,
+    stepIndex: 0
   };
 
   handleNext = () => {
@@ -48,9 +58,9 @@ class SettingsPageComponent extends React.Component {
         label="Submit"
         primary={true}
         disabled={true}
-      />,
+      />
     ];
-
+    let handleChange = (event, index, value) => this.setState({value});
     return (
       <Dialog title="Settings" modal={true} open={this.props.settings.opened} actions={actions}>
       <Stepper activeStep={stepIndex} orientation="vertical">
@@ -58,8 +68,10 @@ class SettingsPageComponent extends React.Component {
           <StepLabel>Select active board</StepLabel>
           <StepContent>
             <p>
-              Select active board:
-
+              Select active board: <br/>
+              <SelectField value={this.props.settings.activeBoardId} onChange={this.boardChanged.bind(this)}>
+                {this.props.settings.boards.map(board => <MenuItem value={board.id} primaryText={board.name} />)}
+              </SelectField>
             </p>
             {this.renderStepActions(0)}
           </StepContent>
@@ -86,6 +98,10 @@ class SettingsPageComponent extends React.Component {
       </Stepper>
       </Dialog>
     );
+  }
+
+  boardChanged(event, key, boardId) {
+    this.props.actions.setActiveBoardId(boardId);
   }
 
   renderStepActions(step) {
