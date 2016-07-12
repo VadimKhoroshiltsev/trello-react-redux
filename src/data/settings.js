@@ -6,9 +6,8 @@ export function getOpenedBoard(){
   });
 }
 
-
-export function getBoardLists(boardId) {
+export function getBoardLists(board) {
   return new Promise((resolve, reject) => {
-    Trello.get(`/boards/${boardId}/lists?filter=open`, resolve, reject);
+    Trello.get(`/boards/${board.id}/lists?filter=open`, resolve, reject);
   });
 }

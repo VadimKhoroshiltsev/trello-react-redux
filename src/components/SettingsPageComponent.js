@@ -20,22 +20,21 @@ import MenuItem from 'material-ui/MenuItem';
 require('styles//SettingsPage.sass');
 
 class SettingsPageComponent extends React.Component {
-  componentWillMount(){
+  componentWillMount() {
     Settings.getOpenedBoard().then(this.props.actions.setAvailableBoards);
   }
-
 
   state = {
     finished: false,
     stepIndex: 0
   };
 
-  handleNext = () => {
+  handleNextButtonClick() {
     const {stepIndex} = this.state;
 
     switch (stepIndex) {
       case 0: {
-         Settings.getBoardLists(this.props.settings.activeBoardId).then((lists => {
+         Settings.getBoardLists(this.props.settings.activeBoard).then((lists => {
            this.props.actions.setActiveLists(lists);
            this.setState({
              stepIndex: stepIndex + 1
@@ -43,10 +42,9 @@ class SettingsPageComponent extends React.Component {
          }).bind(this))
       } break;
     }
+  }
 
-  };
-
-  handlePrev = () => {
+  handleBackButtonClick() {
     const {stepIndex} = this.state;
     if (stepIndex > 0) {
       this.setState({stepIndex: stepIndex - 1});
@@ -68,8 +66,7 @@ class SettingsPageComponent extends React.Component {
         disabled={true}
       />
     ];
-    
-    
+
     return (
       <Dialog title="Settings" modal={true} open={this.props.settings.opened} actions={actions}>
       <Stepper activeStep={stepIndex} orientation="vertical">
@@ -77,8 +74,8 @@ class SettingsPageComponent extends React.Component {
           <StepLabel>Select active board</StepLabel>
           <StepContent>
             <p>
-              <SelectField value={this.props.settings.activeBoardId} onChange={this.boardChanged.bind(this)}>
-                {this.props.settings.boards.map(board => <MenuItem value={board.id} primaryText={board.name} />)}
+              <SelectField value={this.props.settings.activeBoard} onChange={this.handleBoardChange.bind(this)}>
+                {this.props.settings.boards.map(board => <MenuItem value={board} primaryText={board.name} />)}
               </SelectField>
             </p>
             {this.renderStepActions(0)}
@@ -111,8 +108,8 @@ class SettingsPageComponent extends React.Component {
     );
   }
 
-  boardChanged(event, key, boardId) {
-    this.props.actions.setActiveBoardId(boardId);
+  handleBoardChange(event, key, board) {
+    this.props.actions.setActiveBoard(board);
   }
 
   renderStepActions(step) {
@@ -128,7 +125,7 @@ class SettingsPageComponent extends React.Component {
           disableFocusRipple={true}
           disabled={stepIndex === 2}
           primary={true}
-          onClick={this.handleNext.bind(this)}
+          onClick={this.handleNextButtonClick.bind(this)}
           style={{marginRight: 12}}
         />
         )}
@@ -138,7 +135,7 @@ class SettingsPageComponent extends React.Component {
             disabled={stepIndex === 0}
             disableTouchRipple={true}
             disableFocusRipple={true}
-            onClick={this.handlePrev.bind(this)}
+            onClick={this.handleBackButtonClick.bind(this)}
           />
         )}
       </div>

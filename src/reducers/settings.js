@@ -10,7 +10,7 @@ const initialState = {};
 module.exports = function(state = new Immutable({
   opened: false,
   boards: [],
-  activeBoardId: undefined,
+  activeBoard: undefined,
   activeLists: [],
   todoListId: undefined
 }), action) {
@@ -36,10 +36,10 @@ module.exports = function(state = new Immutable({
         boards: action.boards
       })
     }
-    case actionNames.SET_ACTIVE_BOARD_ID: {
+    case actionNames.SET_ACTIVE_BOARD: {
       return new Immutable({
         ...state,
-        activeBoardId: action.boardId
+        activeBoard: action.board
       })
     }
     case actionNames.SET_ACTIVE_LISTS: {
